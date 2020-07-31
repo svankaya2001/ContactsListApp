@@ -27,7 +27,7 @@ public class NewContact extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_contact_item);
-
+        contactHandler = new ContactHandler(getApplicationContext());
         contact_image = (ImageView)findViewById(R.id.iv_user_photo);
         contact_image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +82,7 @@ public class NewContact extends Activity {
             cursor.close();
 
             ImageView imageView = (ImageView) findViewById(R.id.iv_user_photo);
-            imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+            imageView.setImageBitmap(BitmapFactory.decodeFile(cursor.getString(columnIndex)));
 
         }
 
