@@ -12,8 +12,7 @@ public class Contact {
 
     }
 
-    public Contact(int _id, String _name, String _number, String _email_id, String _picture, String _postal_address){
-        this.id = _id;
+    public Contact(String _name, String _number, String _email_id, String _picture, String _postal_address){
         this.name = _name;
         this.number = _number;
         this.email_id = _email_id;
