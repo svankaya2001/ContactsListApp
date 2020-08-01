@@ -3,6 +3,7 @@ package com.example.contactslistapp;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.net.Uri;
@@ -23,6 +24,7 @@ public class NewContact extends Activity {
     private EditText contact_name, contact_number, contact_email, contact_postal;
     String picturePath = "";
     private ContactHandler contactHandler;
+    private Bitmap bitmap;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,9 +82,10 @@ public class NewContact extends Activity {
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             picturePath = cursor.getString(columnIndex);
             cursor.close();
+            ImageView imageView = (ImageView)findViewById(R.id.iv_user_photo);
+            imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
 
-            ImageView imageView = (ImageView) findViewById(R.id.iv_user_photo);
-            imageView.setImageBitmap(BitmapFactory.decodeFile(cursor.getString(columnIndex)));
+            //bitmap = BitmapFactory.decodeFile(picturePath);
 
         }
 

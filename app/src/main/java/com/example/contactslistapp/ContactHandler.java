@@ -77,5 +77,16 @@ public class ContactHandler extends SQLiteOpenHelper {
         return contacts;
     }
 
+    public Boolean deleteContact(int id){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        int i = sqLiteDatabase.delete(TABLE_NAME, ID + " = ?", new String[] {String.valueOf(id)});
+        sqLiteDatabase.close();
+        if(i != 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 
 }

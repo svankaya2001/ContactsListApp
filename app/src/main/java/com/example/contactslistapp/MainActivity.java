@@ -7,13 +7,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button newContactBtn;
     private ContactHandler handler;
+    private ListView contactsList;
+    private ContactsAdapter contactsAdapter;
 
 
 
@@ -23,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         handler = new ContactHandler(getApplicationContext());
         newContactBtn = (Button)findViewById(R.id.ContactBtn);
+
         newContactBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -31,6 +36,11 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
+        contactsList = (ListView)findViewById(R.id.ContactsList);
+        ArrayList<Contact> acontacts = new ArrayList<Contact>();
+        contactsAdapter = new ContactsAdapter(this, acontacts);
+        contactsList.setAdapter(contactsAdapter);
         loadContactData();
 
     }
@@ -38,12 +48,16 @@ public class MainActivity extends AppCompatActivity {
         // Code for loading contact list in ListView
         // Reading all contacts
         List<Contact> contacts = handler.readContacts();
+        contactsAdapter.clear();
 
         for(Contact c : contacts){
-            String record = "ID=" + c.getId() + " | Name=" + c.getName() + " | " + c.getNumber();
+            /*handler.deleteContact(c.getId());
+            String record = "ID=" + c.getId() + " | Name=" + c.getName() + " | " + c.getNumber() + "|" + c.getPicture();
 
-            Log.d("Record",record);
+            Log.d("Record",record);*/
+            contactsAdapter.add(c);
         }
+        contactsAdapter.notifyDataSetChanged();
 
     }
 }
