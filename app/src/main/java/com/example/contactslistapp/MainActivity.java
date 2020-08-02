@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -43,11 +44,12 @@ public class MainActivity extends AppCompatActivity {
         contactsList.setAdapter(contactsAdapter);
         loadContactData();
 
+
     }
     private void loadContactData(){
         // Code for loading contact list in ListView
         // Reading all contacts
-        List<Contact> contacts = handler.readContacts();
+        final List<Contact> contacts = handler.readContacts();
         contactsAdapter.clear();
 
         for(Contact c : contacts){
@@ -58,6 +60,19 @@ public class MainActivity extends AppCompatActivity {
             contactsAdapter.add(c);
         }
         contactsAdapter.notifyDataSetChanged();
+        contactsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(MainActivity.this, ContactDetails.class);
+                intent.putExtra("id", contacts.get(i).getId());
+                intent.putExtra("name", contacts.get(i).getName());
+                intent.putExtra("number", contacts.get(i).getNumber());
+                intent.putExtra("email", contacts.get(i).getEmail_id());
+                intent.putExtra("picture", contacts.get(i).getPicture());
+                intent.putExtra("postal", contacts.get(i).getPostal_address());
+                startActivity(intent);
+            }
+        });
 
     }
 }

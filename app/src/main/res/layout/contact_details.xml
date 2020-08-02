@@ -25,6 +25,7 @@
             android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/ic_launcher_background"
+            android:id="@+id/detail_image"
             />
         <TableLayout
             android:layout_width="match_parent"
@@ -110,6 +111,14 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:hint="Postal Address"
             android:padding="5dp" />
+
+        <Button
+            android:id="@+id/btn_map"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Map" />
+
+
     </LinearLayout>
 
 
